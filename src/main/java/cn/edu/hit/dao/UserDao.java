@@ -1,4 +1,4 @@
-package dao;
+package cn.edu.hit.dao;
 
 import org.apache.ibatis.annotations.Select;
 
