@@ -1,12 +1,14 @@
 package cn.edu.hit.dao;
 
+import cn.edu.hit.po.User;
 import org.apache.ibatis.annotations.Select;
 
-public class UserDao {
+public interface UserDao {
+    int test();
 
-    @Select("select count(*) from 'user'")
-    int test(){
-        return 0;
-    };
+    @Select("select count(0) from `user` where username=#{name}")
+    int changeName(String name);
 
+    void addUser(User user);
 }
+
