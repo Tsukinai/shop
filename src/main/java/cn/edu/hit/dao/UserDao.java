@@ -10,5 +10,8 @@ public interface UserDao {
     int changeName(String name);
 
     void addUser(User user);
+
+    @Select("select user.u_id as uId,user.* from `user` where username=#{username} and password=#{password}")
+    User login(User user);
 }
 
