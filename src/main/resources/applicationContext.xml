@@ -34,7 +34,7 @@
         <!--        起别名-->
         <property name="typeAliasesPackage" value="cn.edu.hit.po"></property>
         <!--        关联映射文件-->
-        <!--property name="mapperLocations" value="classpath:mapper/*.xml"></property-->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"></property>
 
     </bean>
 
