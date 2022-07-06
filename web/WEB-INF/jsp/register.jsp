@@ -1,36 +1,36 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>注册</title>
-<%--    ${pageContext.request.contextPath}  动态获取项目名称  --%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css" />
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/shopping-mall-index.css" />
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/zhonglin.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath}/js/zhongling2.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>注册</title>
+    <%--    ${pageContext.request.contextPath}  动态获取项目名称  --%>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/shopping-mall-index.css"/>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/zhonglin.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/zhongling2.js"></script>
 </head>
 <script>
     //jquery    整个页面加载完毕后执行里面的内容
-    $(function (){
-       //获取name的元素  验证用户名
-        $("#userName").change(function (){
+    $(function () {
+        //获取name的元素  验证用户名
+        $("#userName").change(function () {
             //发送jquery的ajax到后端
             $.ajax({
-                url:"${pageContext.request.contextPath}/user/changeName",
-                type:"post",
-                data:{
-                    name:$(this).val()
+                url: "${pageContext.request.contextPath}/user/changeName",
+                type: "post",
+                data: {
+                    name: $(this).val()
                 },
-                success:function (data){
+                success: function (data) {
                     //data返回的结果
-                    if(data=="ok"){
+                    if (data == "ok") {
                         //可用
-                        $("#userNameMsg").attr("class","dui")
+                        $("#userNameMsg").attr("class", "dui")
                         $("#userNameMsg").text("用户名可用")
-                    }else {
+                    } else {
                         //不可用
-                        $("#userNameMsg").attr("class","cuo")
+                        $("#userNameMsg").attr("class", "cuo")
                         $("#userNameMsg").text("用户名不可用")
                     }
                 }
@@ -39,39 +39,39 @@
         })
 
         //验证密码
-        $("#password").change(function (){
+        $("#password").change(function () {
             //清空确认密码
-            $("#rePasswordMsg").attr("class","")
+            $("#rePasswordMsg").attr("class", "")
             $("#rePasswordMsg").text("")
             $("#rePassword").val("")
             //写一个正则表达式
-            var pattern= /^(?=.*[a-zA-Z])(?=.*[\d])(?=.*[\W])[a-zA-Z\d\W]{6,16}$/
+            var pattern = /^(?=.*[a-zA-Z])(?=.*[\d])(?=.*[\W])[a-zA-Z\d\W]{6,16}$/
             //获取秘吗
             var pass = $(this).val();
             //验证
-            if(pattern.test(pass)){
+            if (pattern.test(pass)) {
                 //符合规则
-                $("#passwordMsg").attr("class","dui")
+                $("#passwordMsg").attr("class", "dui")
                 $("#passwordMsg").text("密码可用")
-            }else {
+            } else {
                 //不符合规则
-                $("#passwordMsg").attr("class","cuo")
+                $("#passwordMsg").attr("class", "cuo")
                 $("#passwordMsg").text("密码不符合")
             }
 
         })
 
         //确认密码
-        $("#rePassword").change(function (){
+        $("#rePassword").change(function () {
             //拿到确认密码
             var repass = $(this).val();
             //拿到输入密码
             var pass = $("#password").val();
-            if(repass==pass){
-                $("#rePasswordMsg").attr("class","dui")
+            if (repass == pass) {
+                $("#rePasswordMsg").attr("class", "dui")
                 $("#rePasswordMsg").text("密码可用")
-            }else {
-                $("#rePasswordMsg").attr("class","cuo")
+            } else {
+                $("#rePasswordMsg").attr("class", "cuo")
                 $("#rePasswordMsg").text("密码不可用")
             }
 
@@ -79,36 +79,36 @@
 
 
         //验证手机号
-        $("#phone").change(function (){
+        $("#phone").change(function () {
             //正则
-            var phontPatter=/^1[3,5,7,8][\d]{9}$/
+            var phontPatter = /^1[3,5,7,8][\d]{9}$/
             //获取手机号
             var phone = $(this).val();
-            if(phontPatter.test(phone)){
-                $("#phoneMsg").attr("class","dui")
+            if (phontPatter.test(phone)) {
+                $("#phoneMsg").attr("class", "dui")
                 $("#phoneMsg").text("手机号可用")
-            }else {
-                $("#phoneMsg").attr("class","cuo")
+            } else {
+                $("#phoneMsg").attr("class", "cuo")
                 $("#phoneMsg").text("手机号不可用")
             }
 
         })
 
         //阻止提交
-        $('form').submit(function (){
-            var flag=true
+        $('form').submit(function () {
+            var flag = true
 
-           //验证class属性有没有是cuo
-            $("[name='msg']").each(function (){
-                if($(this).attr("class")=="cuo"){
-                    flag=false
+            //验证class属性有没有是cuo
+            $("[name='msg']").each(function () {
+                if ($(this).attr("class") == "cuo") {
+                    flag = false
                 }
             })
 
             //验证标识符
-            if (flag){
+            if (flag) {
                 return true
-            }else {
+            } else {
                 return false
             }
 
@@ -120,28 +120,28 @@
         <%--}--%>
 
         //换图片
-        $("#changeCode").click(function (){
-            $("#code").attr("src","${pageContext.request.contextPath}/val/Code?"+Math.random())
+        $("#changeCode").click(function () {
+            $("#code").attr("src", "${pageContext.request.contextPath}/val/Code?" + Math.random())
         })
 
         //换图片2
-        $("#code").click(function (){
-            $("#code").attr("src","${pageContext.request.contextPath}/val/Code?"+Math.random())
+        $("#code").click(function () {
+            $("#code").attr("src", "${pageContext.request.contextPath}/val/Code?" + Math.random())
         })
 
         //验证验证码
-        $("#validate").change(function (){
+        $("#validate").change(function () {
             $.ajax({
                 url: "${pageContext.request.contextPath}/val/checkValidate",
                 data: {
-                    code:$(this).val()
+                    code: $(this).val()
                 },
-                success:function (data){
-                    if(data=="ok"){
-                        $("#codeMsg").attr("class","dui")
+                success: function (data) {
+                    if (data == "ok") {
+                        $("#codeMsg").attr("class", "dui")
                         $("#codeMsg").text("正确")
-                    }else {
-                        $("#codeMsg").attr("class","cuo")
+                    } else {
+                        $("#codeMsg").attr("class", "cuo")
                         $("#codeMsg").text("错误")
                     }
                 }
@@ -175,10 +175,8 @@
 </div>
 
 
-
-
-    <!--内容开始-->
-    <form action="${pageContext.request.contextPath}/user/doregister" method="post">
+<!--内容开始-->
+<form action="${pageContext.request.contextPath}/user/doregister" method="post">
     <div class="password-con registered">
         <div class="psw">
             <p class="psw-p1">用户名</p>
@@ -217,12 +215,12 @@
             <input type="checkbox" name="hobby" id="hobby" required></input>
             <p>我有阅读并同意<span>《撒欢购网站服务协议》</span></p>
         </div>
-        <button class="psw-btn" id="register" >立即注册</button>
+        <button class="psw-btn" id="register">立即注册</button>
         <p class="sign-in">已有账号？请<a href="#">登录</a></p>
     </div>
-    </form>
+</form>
 <!--底部一块-->
 <%@ include file="common/bottom.jsp" %>
-    
+
 </body>
 </html>
