@@ -11,4 +11,6 @@ public interface UserService {
 
 
     void addUser(User user);
+
+    User login(User user);
 }
