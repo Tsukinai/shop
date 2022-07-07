@@ -553,7 +553,7 @@
                 <c:forEach items="${categorySecond.list}" var="list">
                     <li style="margin-right:0;">
                         <div class="li-top">
-                            <a href="http://localhost:7070/SSM-EC/product/toproduct?pId=${list.pId}"
+                            <a href="http://localhost:7070/shop/product/toproduct?pId=${list.pId}"
                                class="li-top-tu"><img
                                     src="${pageContext.request.contextPath}/${list.image}"
                                     style="width: 95px;height: 110px"/></a>

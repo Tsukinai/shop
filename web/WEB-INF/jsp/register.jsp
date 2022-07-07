@@ -159,7 +159,7 @@
 
 
             <c:if test="${empty user}">
-                Hi!您好，欢迎来到撒欢购，请登录 <a href="http://localhost:7070/SSM-EC/user/tologin">【登录】</a>
+                Hi!您好，欢迎来到撒欢购，请登录 <a href="http://localhost:7070/shop/user/tologin">【登录】</a>
             </c:if>
 
 

@@ -134,11 +134,11 @@
     </div>
     <div class="erweima f-r">
         <a
-                href="http://localhost:7070/SSM-EC/index/toindex"><img
+                href="http://localhost:7070/shop/index/toindex"><img
                 src="${pageContext.request.contextPath}/images/zl2-04.gif"/></a>
     </div>
     <div class="search f-r">
-        <form method="get" action="http://localhost:7070/SSM-EC/Category/toCategorySecond">
+        <form method="get" action="http://localhost:7070/shop/Category/toCategorySecond">
             <div class="search-info">
                 <input type="text" placeholder="请输入商品名称" name="pName"/>
                 <button>搜索</button>
