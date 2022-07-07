@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.ServletContext;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
 
@@ -21,16 +22,12 @@ public class IndexController {
 
     @Autowired
     ServletContext servletContext;
-
-
     @RequestMapping("/toindex")
     public String toindex(Model model){
-
-        List<CategoryExt> category= indexService.getCategory();
+        List<CategoryExt> category = indexService.getCategory();
         model.addAttribute("category",category);
-        Map<Integer,List<Product>> product=indexService.getProduct(category);
+        Map<Integer, List<Product>> product = indexService.getProduct(category);
         model.addAttribute("product",product);
-
         return "index";
     }
 }
