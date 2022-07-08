@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.edu.hit.dao.OrderDao">
+
+    <insert id="addOrder" parameterType="Order">
+        <selectKey resultType="Integer" keyProperty="oId" keyColumn="o_id" order="AFTER">
+            SELECT LAST_INSERT_ID();
+        </selectKey>
+
+        insert into `order` values (default,#{total},#{orderTime},#{state},#{name},#{phone},#{addr},#{uId})
+    </insert>
+    <insert id="addOrderItem" parameterType="OrderItem">
+        insert into order_item
+        values (default,#{count},#{subTotal},#{pId},#{oId})
+    </insert>
+
+    <resultMap id="selMap" type="OrderExt">
+        <!--     订单表-->
+        <id property="oId" column="o_id"></id>
+        <result property="total" column="total"></result>
+        <result property="orderTime" column="order_time"></result>
+        <result property="state" column="state"></result>
+        <result property="name" column="name"></result>
+        <result property="phone" column="phone"></result>
+        <result property="addr" column="addr"></result>
+        <result property="uId" column="u_id"></result>
+        <!--      订单项-->
+        <collection property="list" ofType="OrderItemExt">
+            <id property="itemId" column="item_id"></id>
+            <result property="count" column="count"></result>
+            <result property="subTotal" column="sub_total"></result>
+            <result property="pId" column="p_id"></result>
+            <result property="oId" column="o_id"></result>
+            <!--     商品表-->
+            <association property="product" javaType="Product">
+                <id property="pId" column="p_id"></id>
+                <result property="pName" column="p_name"></result>
+                <result property="marketPrice" column="market_price"></result>
+                <result property="shopPrice" column="shop_price"></result>
+                <result property="image" column="image"></result>
+                <result property="pDesc" column="p_desc"></result>
+                <result property="isHot" column="is_hot"></result>
+                <result property="pDate" column="p_date"></result>
+                <result property="csId" column="cs_id"></result>
+            </association>
+        </collection>
+    </resultMap>
+    <select id="selallOrder" parameterType="Integer" resultMap="selMap">
+        SELECT * FROM (SELECT * FROM `order` WHERE u_id=#{uId} and state!=-1) AS `order` JOIN order_item on
+            `order`.o_id=order_item.o_id JOIN product on order_item.p_id=product.p_id ORDER BY `order`.o_id desc
+    </select>
+
+    <select id="selState" parameterType="Integer" resultType="Map">
+        SELECT state,count(0) FROM `order` WHERE u_id=#{uId} and state!=-1 GROUP BY state ORDER BY state
+    </select>
+
+    <select id="selAll" parameterType="Integer" resultMap="selMap">
+        SELECT * FROM (SELECT * FROM `order` WHERE o_id=#{oId}) a JOIN order_item b on a.o_id = b.o_id JOIN
+                      p on p.p_id=b.p_id
+    </select>
+
+    <!--   update-->
+    <update id="updateState" parameterType="Order">
+        UPDATE `order` set state=#{state} where o_id=#{oId}
+    </update>
+
+</mapper>
